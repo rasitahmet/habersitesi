@@ -1,0 +1,9 @@
+{% if resimler_list %}
+    <ul>
+    {% for resim in resimler_list %}
+        <li><img src="/{{ resim.resim }}" alt="{{ resim.aciklama }}"></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No haber are available.</p>
+{% endif %}

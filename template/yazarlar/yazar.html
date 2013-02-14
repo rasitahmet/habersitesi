@@ -1,0 +1,9 @@
+{% if yazilar_list %}
+    <ul>
+    {% for yazi in yazilar_list %}
+        <li><a href="/yazarlar/yazi/{{ yazi.id }}/">{{ yazi.baslik }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No haber are available.</p>
+{% endif %}

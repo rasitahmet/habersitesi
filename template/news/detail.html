@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/reset.css" />
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/style.css" />
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/grid.css" />
+	<!--[if lt IE 7]>
+	<div style=' clear: both; text-align:center; position: relative;'>
+		<a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+			<img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+		</a>
+	</div>
+	<![endif]-->
+	<!--[if lt IE 9]>
+		<script type="text/javascript" src="{{ STATIC_URL }}js/html5.js"></script>
+		<link rel="stylesheet" href="{{ STATIC_URL }}css/ie.css" type="text/css" media="screen">
+	<![endif]-->
+	<title>kure24</title>
+</head>
+<body>
+<header>
+            <div class="main">
+                <div class="wrapper p3">
+                    <h1><a href="index.html">FitLine</a></h1>
+                    <form id="search-form" method="post" enctype="multipart/form-data">
+                        <fieldset>	
+                            <div class="search-field">
+                                <input name="search" type="text" value="Search" onblur="if(this.value=='') this.value='Search'" onfocus="if(this.value =='Search' ) this.value=''">
+                                <a class="search-button" href="#" onclick="document.getElementById('search-form').submit()"></a>	
+                            </div>						
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+			<div class="menu-row">
+                <div class="main">
+                    <nav>
+                        <ul class="menu wrapper">
+                            <li><a class="active" href="index.html">Home Page</a></li>
+                            <li><a href="nutrition.html">Nutrition</a></li>
+                            <li><a href="diets.html">Best Diets</a></li>
+                            <li><a href="programs.html">Programs</a></li>
+                            <li><a href="contacts.html">Contacts</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            
+            <!-- <ul class="tabs">
+                <li class="active"><a href="#tab1">Best Diet Advices</a></li>
+                <li><a href="#tab2">Exercise &amp; Physical Fitness</a></li>
+                <li><a href="#tab3">Weight Loss Programs</a></li>
+            </ul> -->
+            <!-- <div class="tab_container">
+                <div id="tab1" class="tab_content" style="display: block; ">
+                    <div class="main">
+                    	<div class="wrapper">
+                        	<figure class="img-indent-r"><img src="images/page1-img1.jpg" alt=""></figure>
+                            <div class="extra-wrap">
+                            	<div class="indent">
+                                    <strong class="title">Best</strong>
+                                    <p class="p5">Diet Advice You've<br> Never Heard Before</p>
+                                    <div class="btn-wrap">
+                                        <span class="button">
+                                            <a href="#"><strong>Read More</strong></a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tab2" class="tab_content" style="display: none; ">
+                	<div class="main">
+                    	<div class="wrapper">
+                        	<figure class="img-indent-r"><img src="images/page1-img2.jpg" alt=""></figure>
+                            <div class="extra-wrap">
+                            	<div class="indent">
+                                    <strong class="title">Exercise</strong>
+                                    <p class="p5">And Physical<br>Fitness</p>
+                                    <div class="btn-wrap">
+                                        <span class="button">
+                                            <a href="#"><strong>Read More</strong></a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tab3" class="tab_content" style="display: none; ">
+                	<div class="main">
+                    	<div class="wrapper">
+                        	<figure class="img-indent-r"><img src="images/page1-img3.jpg" alt=""></figure>
+                            <div class="extra-wrap">
+                            	<div class="indent">
+                                    <strong class="title">Fastest</strong>
+                                    <p class="p5">Weight Loss<br>Programs</p>
+                                    <div class="btn-wrap">
+                                        <span class="button">
+                                            <a href="#"><strong>Read More</strong></a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </header>
+	<div class="container_12">	
+		<div class="grid_8">
+			<h2>{{ news.title }}</h2>
+
+			{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+			<div class="wrapper">
+				<div class="grid_4 alpha">
+					<p class="p2">{{ news.editor }}</br>{{ news.place }}</p>
+				</div>
+				<div class="grid_4 omega">
+					<p class="p2">{{ news.pub_date }}</p>
+				</div>
+			</div>
+			<h6 class="p0">{{ news.subtitle }}</h6>
+			{% for  media in news.media_set.all %}
+			  <img width="100%" src="{{ media.image.url }}" alt="{{ media.subtitle }}">
+			  <p class="p2">{{ media.subtitle }}</p>
+			{% endfor %}
+			<p>{{ news.content|escape|linebreaks }}</p>
+		</div>
+		<div class="grid_4">
+			{% for  comment in news.comment_set.all %}
+			<form action="/news/{{ news.id }}/rate/" method="post">
+				{% csrf_token %}
+
+				<h6 class="p0">{{ comment.name }}</h6>
+				<p class="p2">{{ comment.comment }}</p>
+				<div class="wrapper">
+					<div class="grid_1 alpha">
+						<p class="p2">{{ comment.rate }}</p>
+					</div>
+					<div class="grid_3 omega">
+						<p class="p2">{{ comment.com_time }}</p>
+					</div>
+				</div>
+				<input type="radio" name="rate" id="good{{ forloop.counter }}" value="g{{ comment.id }}" />
+				<label for="good{{ forloop.counter }}">good</label>
+				<input type="radio" name="rate" id="bad{{ forloop.counter }}" value="b{{ comment.id }}" />
+				<label for="bad{{ forloop.counter }}">bad</label>
+
+				<input class="button-2" type="submit" value="Rate" />
+			</form>
+			{% endfor %}  
+
+
+			<form action="/news/{{ news.id }}/comment/" method="post">
+				{% csrf_token %}
+				<input type="text" name="name" id="name" value="enter a name"/></br>
+				<input type="text" name="comment" id="comment" value="enter a comment"/></br>
+				<input class="button-2" type="submit" value="Comment"/>
+
+			</form>
+		</div>
+	</div>
+</body>
+</html>

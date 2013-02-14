@@ -1,0 +1,9 @@
+{% if roportaj_list %}
+    <ul>
+    {% for roportaj in roportaj_list %}
+        <li><a href="/roportaj/{{ roportaj.id }}/">{{ roportaj.baslik }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No roportaj are available.</p>
+{% endif %}

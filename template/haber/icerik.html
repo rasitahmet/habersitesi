@@ -1,0 +1,8 @@
+<h1>{{ haber.baslik }}</h1>
+<ul>
+{% for hresim in haber.resimler.all %}
+    <li><img src="media/{{ hresim.resim }}"></li>
+{% endfor %}
+</ul>
+<blockquote class="left">{{ haber.aciklama }}</blockquote>
+<p>{{ haber.icerik|escape|linebreaks }}</p>

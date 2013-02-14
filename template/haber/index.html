@@ -1,0 +1,11 @@
+{% load static %}
+<img src="{{ STATIC_URL }}/static/logo.png" />
+{% if latest_haber_list %}
+    <ul>
+    {% for haber in latest_haber_list %}
+        <li><a href="/haber/{{ haber.id }}/">{{ haber.baslik }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No haber are available.</p>
+{% endif %}

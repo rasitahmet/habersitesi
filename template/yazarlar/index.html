@@ -1,0 +1,9 @@
+{% if yazar_list %}
+    <ul>
+    {% for yazar in yazar_list %}
+        <li><a href="/yazarlar/{{ yazar.id }}/">{{ yazar.yazaradi }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No haber are available.</p>
+{% endif %}

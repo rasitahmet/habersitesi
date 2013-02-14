@@ -1,0 +1,9 @@
+{% if seminer_list %}
+    <ul>
+    {% for seminer in seminer_list %}
+        <li><a href="/seminer/{{ seminer.id }}/">{{ seminer.baslik }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No seminer are available.</p>
+{% endif %}
